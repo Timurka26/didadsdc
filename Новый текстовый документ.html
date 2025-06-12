@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>проверка на чурку</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    #response {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    #okakImage {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 9999;
+    }
+    #okakImage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #chessboard {
+      margin-top: 30px;
+    }
+    #chessboard img {
+      width: 300px;
+      max-width: 90vw;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="question">0. hxg4 Nxg4 g3 Ndf6 Nh4</h1>
+  <input type="text" id="inputText" placeholder="пиши сюда">
+  <button onclick="checkInput()">проверка</button>
+  <div id="response"></div>
+  <div id="okakImage">
+    <img src="https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_683730e41f79717297e2c412_6841856c54d4be1a511dec05/scale_1200" alt="окак">
+  </div>
+   <div id="chessboard">
+    <img src="https://images.steamusercontent.com/ugc/16552189179931708755/666DEC682F1BB9775A63BF868B18F57F00CAB66C/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="шахматная доска">
+  </div>
+
+  <script>
+    let step = 1;
+
+    function checkInput() {
+      const input = document.getElementById("inputText");
+      const responseDiv = document.getElementById("response");
+      const question = document.getElementById("question");
+      const userInput = input.value;
+      const chessboard = document.getElementById("chessboard");
+      const okakImage = document.getElementById("okakImage");
+
+      if (step === 1) {
+        if (userInput === "Nxf2") {
+          responseDiv.textContent = "4. Kxf2 ?";
+          responseDiv.style.color = "green";
+          question.textContent = "первый w а второй?";
+          input.value = "";
+          step = 2;
+        } else {
+          responseDiv.textContent = "но но но мистер фиш";
+          responseDiv.style.color = "red";
+        }
+      } else if (step === 2) {
+        if (userInput === "Rxh4") {
+          responseDiv.textContent = "5. gxh4 ?";
+          responseDiv.style.color = "green";
+          question.textContent = "ww трипалью?";
+          input.value = "";
+          step =3;
+        } else {
+          responseDiv.textContent = "но но но мистер фиш";
+          responseDiv.style.color = "red";
+        }
+      } else if (step === 3) {
+         if (userInput === "Qh2+") {
+          responseDiv.textContent = "6.Kf3";
+          responseDiv.style.color = "green";
+          question.textContent = "wwww квадраю?";
+          input.value = "";
+          step =4;
+         }else {
+          responseDiv.textContent = "но но но мистер фиш";
+          responseDiv.style.color = "red";
+         }  
+      } else if (step === 4) {
+         if (userInput === "Ne4") {
+          responseDiv.textContent = "6.Ke3";
+          responseDiv.style.color = "green";
+          question.textContent = "wwwww пентаю?";
+          input.value = "";
+          step =5;
+         }else {
+          responseDiv.textContent = "но но но мистер фиш";
+          responseDiv.style.color = "red";
+        }
+      } else if (step === 5) {
+        if (userInput === "Qf2#") {
+          responseDiv.textContent = "wwwww";
+          responseDiv.style.color = "green";
+          input.disabled = true;
+          okakImage.style.display = "block";
+          chessboard.style.display = "none";
+        } else {
+          responseDiv.textContent = "но но но мистер фиш";
+          responseDiv.style.color = "red";
+        }
+      } 
+    }
+  </script>
+</body>
+</html>
